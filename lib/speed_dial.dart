@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/rotating_add_icon.dart';
 
 import 'animated_floating_button.dart';
 import 'background_overlay.dart';
@@ -31,6 +32,9 @@ class SpeedDial extends StatefulWidget {
   /// The opacity of the background overlay when the dial is open.
   final double overlayOpacity;
 
+  final bool rotatingAddIcon;
+  final IconThemeData rotatingAddIconTheme;
+
   /// The animated icon to show as the main button child. If this is provided the [child] is ignored.
   final AnimatedIconData animatedIcon;
 
@@ -58,6 +62,8 @@ class SpeedDial extends StatefulWidget {
     this.heroTag,
     this.animatedIcon,
     this.animatedIconTheme,
+    this.rotatingAddIcon,
+    this.rotatingAddIconTheme,
     this.child,
     this.onOpen,
     this.onClose,
@@ -102,8 +108,7 @@ class _SpeedDialState extends State<SpeedDial> with TickerProviderStateMixin {
   @override
   void dispose() {
     _controller.dispose();
-    _childrenControllers
-        .forEach((childController) => childController.dispose());
+    _childrenControllers.forEach((childController) => childController.dispose());
     super.dispose();
   }
 
@@ -122,8 +127,7 @@ class _SpeedDialState extends State<SpeedDial> with TickerProviderStateMixin {
         );
       } else {
         Timer(
-          Duration(
-              milliseconds: (index - (widget.children.length - 1)).abs() * 30),
+          Duration(milliseconds: (index - (widget.children.length - 1)).abs() * 30),
           () => childController.reverse(),
         );
       }
@@ -182,14 +186,16 @@ class _SpeedDialState extends State<SpeedDial> with TickerProviderStateMixin {
   }
 
   Widget _renderButton() {
-    var child = widget.animatedIcon != null
-        ? AnimatedIcon(
-            icon: widget.animatedIcon,
-            progress: _animation,
-            color: widget.animatedIconTheme?.color,
-            size: widget.animatedIconTheme?.size,
-          )
-        : widget.child;
+    var child = (widget.rotatingAddIcon != null && widget.rotatingAddIcon)
+        ? RotatingAddIcon(animation: _animation, theme: widget.rotatingAddIconTheme)
+        : ((widget.animatedIcon != null)
+            ? AnimatedIcon(
+                icon: widget.animatedIcon,
+                progress: _animation,
+                color: widget.animatedIconTheme?.color,
+                size: widget.animatedIconTheme?.size,
+              )
+            : widget.child);
 
     var fabChildren = _getChildrenList();
     return Container(
