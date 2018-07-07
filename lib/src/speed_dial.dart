@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/rotating_add_icon.dart';
 
+import 'rotating_add_icon.dart';
 import 'animated_floating_button.dart';
 import 'background_overlay.dart';
 import 'animated_child.dart';
