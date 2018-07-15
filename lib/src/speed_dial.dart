@@ -108,7 +108,8 @@ class _SpeedDialState extends State<SpeedDial> with TickerProviderStateMixin {
   @override
   void dispose() {
     _controller.dispose();
-    _childrenControllers.forEach((childController) => childController.dispose());
+    _childrenControllers
+        .forEach((childController) => childController.dispose());
     super.dispose();
   }
 
@@ -127,7 +128,8 @@ class _SpeedDialState extends State<SpeedDial> with TickerProviderStateMixin {
         );
       } else {
         Timer(
-          Duration(milliseconds: (index - (widget.children.length - 1)).abs() * 30),
+          Duration(
+              milliseconds: (index - (widget.children.length - 1)).abs() * 30),
           () => childController.reverse(),
         );
       }
@@ -187,7 +189,8 @@ class _SpeedDialState extends State<SpeedDial> with TickerProviderStateMixin {
 
   Widget _renderButton() {
     var child = (widget.rotatingAddIcon != null && widget.rotatingAddIcon)
-        ? RotatingAddIcon(animation: _animation, theme: widget.rotatingAddIconTheme)
+        ? RotatingAddIcon(
+            animation: _animation, theme: widget.rotatingAddIconTheme)
         : ((widget.animatedIcon != null)
             ? AnimatedIcon(
                 icon: widget.animatedIcon,
