@@ -40,7 +40,9 @@ class AnimatedChild extends AnimatedWidget {
   Widget buildLabel() {
     final Animation<double> animation = listenable;
 
-    if (!((label != null || labelWidget != null) && visible && animation.value == 62.0)) {
+    if (!((label != null || labelWidget != null) &&
+        visible &&
+        animation.value == 62.0)) {
       return Container();
     }
 
@@ -86,31 +88,30 @@ class AnimatedChild extends AnimatedWidget {
             height: 0.0,
           );
 
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          buildLabel(),
-          Container(
-            width: 62.0,
-            height: animation.value,
-            padding: EdgeInsets.only(bottom: 62.0 - animation.value),
-            child: Container(
-              height: 62.0,
-              width: animation.value,
-              padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
-              child: FloatingActionButton(
-                heroTag: heroTag,
-                onPressed: _performAction,
-                backgroundColor: backgroundColor,
-                foregroundColor: foregroundColor,
-                elevation: elevation ?? 6.0,
-                child: buttonChild,
-              ),
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: <Widget>[
+        buildLabel(),
+        Container(
+          width: 62.0,
+          height: animation.value,
+          padding: EdgeInsets.only(bottom: 62.0 - animation.value),
+          child: Container(
+            height: 62.0,
+            width: animation.value,
+            padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
+            child: FloatingActionButton(
+              heroTag: heroTag,
+              onPressed: _performAction,
+              backgroundColor: backgroundColor,
+              foregroundColor: foregroundColor,
+              elevation: elevation ?? 6.0,
+              child: buttonChild,
             ),
-          )
-        ],
-      ),
+          ),
+        )
+      ],
     );
   }
 }

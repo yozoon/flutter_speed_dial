@@ -1,8 +1,8 @@
 name: flutter_speed_dial
 description: Flutter plugin to implement a beautiful and dynamic Material Design Speed Dial, with labels, animated icons and hide on scrolling.
-version: 1.2.5
-author: Dario Ielardi <dario.ielardi@gmail.com>
-homepage: https://github.com/darioielardi/flutter_speed_dial
+version: 1.2.8
+author: Dario Ielardi <dario.ielardi@gmail.com>, Julius Piso <julius@piso.at>
+homepage: https://github.com/yozoon/flutter_speed_dial
 
 dependencies:
   flutter:
