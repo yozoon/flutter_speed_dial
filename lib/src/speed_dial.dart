@@ -246,7 +246,7 @@ class _SpeedDialState extends State<SpeedDial>
               constraints: BoxConstraints(
                 maxHeight: widget.visible ? maxHeight : 0.0,
                 maxWidth: widget.visible
-                    ? ((maxWidth - 62.0) * _controller.value) + 62.0
+                    ? (_controller.value > 0.0 ? maxWidth : 58.0)
                     : 0.0,
               ),
               child: child,
@@ -264,11 +264,7 @@ class _SpeedDialState extends State<SpeedDial>
                   child: animatedFloatingButton,
                 ),
               ),
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  fabChildren,
-                ),
-              ),
+              SliverList(delegate: SliverChildListDelegate(fabChildren)),
               if (_open)
                 SliverFillRemaining(
                   hasScrollBody: false,
@@ -300,6 +296,7 @@ class _SpeedDialState extends State<SpeedDial>
     return Stack(
       alignment: Alignment.bottomRight,
       fit: StackFit.expand,
+      clipBehavior: Clip.none,
       overflow: Overflow.visible,
       children: children,
     );
